@@ -2,8 +2,7 @@
 ... under construction
 
 
-Install
-____
+**Install RGB**
 
 Dependencies:
 
@@ -11,7 +10,7 @@ standard compile stuff (c compiler, make, etc)
 
 linux-headers
 
-**kernel module**
+Open a terminal and:
 
 git clone https://github.com/slimbook/keyboard.git
 
