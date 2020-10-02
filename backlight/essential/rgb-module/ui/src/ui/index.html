@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style/main.css">
+</head>
+<body>
+    <h1>TUXEDO WMI UI</h1>
+    <form id="language_form">
+        <input type="radio" name="selected_language" id="language_english" value="default" onclick="set_language()" checked />
+        <label for="language_english">English</label>
+
+        <input type="radio" name="selected_language" id="language_german" value="de" onclick="set_language()" />
+        <label for="language_german">Deutsch</label>
+    </form>
+
+    <div class="optionsection">
+        <h3 id="header_mode"></h3>
+        <div class="centercontainer">
+            <form id="mode_form"></form>
+        </div>
+    </div>
+
+    <div class="optionsection">
+        <h3 id="header_slider"></h3>
+        <div class="slidecontainer centercontainer">
+            <input type="range" class="slider" 
+            id="backlight_value_range" 
+            name="backlight_value_range_name" 
+            oninput="output_backlight_value_id.value = backlight_value_range.value" />
+        </div>
+        <div class="centercontainer">
+            <output name="output_backlight_value" id="output_backlight_value_id"></output>
+        </div>
+    </div>
+
+    <div class="optionsection" id="keyboard_state">
+        <h3 id="header_state"></h3>
+        <form id="keyboard_state_form">
+            <input type="radio" id="keyboard_state_on_radio" name="selected_keyboard_state" />
+            <label for="keyboard_state_on_radio" id="keyboard_state_on_label"></label>
+        
+            <input type="radio" id="keyboard_state_off_radio" name="selected_keyboard_state" />
+            <label for="keyboard_state_off_radio" id="keyboard_state_off_label"></label>
+        </form>
+    </div>
+
+    <div class="optionsection" id="custom_colors">
+        <h3 id="header_color"></h3>
+
+        <h4 id="header_form_left"></h4>
+        <div class="centercontainer">
+            <form id="color_form_left"></form>
+        </div>
+
+        <h4 id="header_form_middle"></h4>
+        <div class="centercontainer">
+            <form id="color_form_middle"></form>
+        </div>
+
+        <h4 id="header_form_right"></h4>
+        <div class="centercontainer">
+            <form id="color_form_right"></form>
+        </div>
+    </div>
+
+    <div class="buttoncontainer">
+        <input type="button" onclick="save()" id="savebutton">
+        
+        <input type="button" onclick="window.load_module()" id="load_button">
+        <input type="button" onclick="window.unload_module()" id="unload_button">
+
+        <input type="button" onclick="window.activate_automatic_module_start()" id="activate_automatic_start">
+        <input type="button" onclick="window.deactivate_automatic_module_start()" id="deactivate_automatic_start">
+
+        <input type="button" onclick="set_settings_as_default()" id="set_as_default">
+    </div>
+
+    <div id="module_status_element"></div>
+
+    <script type="text/javascript" src="./script/main.js"></script>
+    <script type="text/javascript">
+        var language = "default";
+
+        setInterval(function() {window.set_module_status(set_module_status_callback);}, 1000);
+        render_view();
+
+        function render_view()
+        {
+            document.getElementById("savebutton").value = get_language_string(language, "save");
+            document.getElementById("load_button").value = get_language_string(language, "load");
+            document.getElementById("unload_button").value = get_language_string(language, "unload");
+
+            document.getElementById("activate_automatic_start").value = get_language_string(language, "activate_automatic_start");
+            document.getElementById("deactivate_automatic_start").value = get_language_string(language, "deactivate_automatic_start");
+
+            document.getElementById("set_as_default").value = get_language_string(language, "set_as_default");
+
+            document.getElementById("header_mode").innerHTML = get_language_string(language, "header_mode");
+            document.getElementById("header_slider").innerHTML = get_language_string(language, "header_slider");
+            document.getElementById("header_state").innerHTML = get_language_string(language, "header_state");
+            document.getElementById("header_color").innerHTML = get_language_string(language, "header_color");
+
+            document.getElementById("backlight_value_range").max = window.keyboard_max_brightness;
+            document.getElementById("backlight_value_range").min = window.keyboard_min_brightness;
+            document.getElementById("backlight_value_range").step = window.keyboard_step_brightness;
+            document.getElementById("backlight_value_range").value = window.keyboard_brightness;
+            document.getElementById("output_backlight_value_id").value = window.keyboard_brightness;
+
+            document.getElementById("keyboard_state_on_radio").value = window.keyboard_state_on;
+            document.getElementById("keyboard_state_off_radio").value = window.keyboard_state_off;
+            if(window.keyboard_state == window.keyboard_state_on)
+            {
+                document.getElementById("keyboard_state_on_radio").checked = true;
+                document.getElementById("keyboard_state_off_radio").checked = false;
+            }
+            else
+            {
+                document.getElementById("keyboard_state_on_radio").checked = false;
+                document.getElementById("keyboard_state_off_radio").checked = true;
+            }
+
+            document.getElementById("keyboard_state_on_label").innerHTML = get_language_string(language, "keyboard_on");
+            document.getElementById("keyboard_state_off_label").innerHTML = get_language_string(language, "keyboard_off");
+
+            document.getElementById("header_form_left").innerHTML = get_language_string(language, "left_region");
+            document.getElementById("header_form_middle").innerHTML = get_language_string(language, "middle_region");
+            document.getElementById("header_form_right").innerHTML = get_language_string(language, "right_region");
+
+            var color_regions = ["left", "middle", "right"];
+
+            var current_mode = window.keyboard_mode;
+            var current_colors = window.keyboard_colors;
+
+            for(var j = 0; j < color_regions.length; j++)
+            {
+                var current_region = color_regions[j];
+                var current_color = current_colors[current_region];
+
+                for(var i = 0; i < window.available_keyboard_colors["colors"].length; i++)
+                {
+                    var color = window.available_keyboard_colors["colors"][i].name;
+                    var color_input_element = document.createElement("input");
+                    var color_input_element_id = "color_input_element_" + current_region + "_" + color;
+                    color_input_element.type = "radio";
+                    color_input_element.value = color;
+                    color_input_element.name = "selected_color_" + current_region;
+                    color_input_element.id = color_input_element_id;
+                    
+                    document.getElementById("color_form_" + current_region).appendChild(color_input_element);
+
+                    if(current_color == color)
+                    {
+                        color_input_element.checked = true;
+                    }
+
+                    var color_input_label = document.createElement("label");
+                    color_input_label.innerHTML = get_language_string(language, color);
+                    color_input_label.setAttribute("for", color_input_element_id);
+                    document.getElementById("color_form_" + current_region).appendChild(color_input_label);
+                }
+            }
+
+            for(var i = 0; i < window.available_keyboard_modes["modes"].length; i++)
+            {
+                var mode = window.available_keyboard_modes["modes"][i].name;
+                var mode_value = window.available_keyboard_modes["modes"][i].value;
+                var mode_input_element = document.createElement("input");
+                var mode_input_element_id = "color_input_element_" + mode;
+                mode_input_element.type = "radio";
+                mode_input_element.value = mode;
+                mode_input_element.name = "selected_mode";
+                mode_input_element.setAttribute("mode_value", mode_value);
+                mode_input_element.addEventListener("click", function(){change_mode(this);});
+                mode_input_element.id = mode_input_element_id;
+
+                if(current_mode == window.available_keyboard_modes["modes"][i].value)
+                {
+                    mode_input_element.checked = true;
+                }
+                
+                document.getElementById("mode_form").appendChild(mode_input_element);
+
+                var mode_input_label = document.createElement("label");
+                mode_input_label.innerHTML = get_language_string(language, mode);
+                mode_input_label.setAttribute("for", mode_input_element_id);
+                document.getElementById("mode_form").appendChild(mode_input_label);
+            }
+        }
+
+        function hide_custom_colors()
+        {
+            document.getElementById("custom_colors").style.visibility = "hidden";
+            document.getElementById("custom_colors").style.display = "none";
+        }
+
+        function show_custom_colors()
+        {
+            document.getElementById("custom_colors").style.visibility = "visible";
+            document.getElementById("custom_colors").style.display = "block";
+        }
+
+        function change_mode(button)
+        {
+            var mode_value = button.value;
+            console.log(mode_value);
+
+            if(mode_value == "custom")
+            {
+                show_custom_colors();
+            }
+            else
+            {
+                hide_custom_colors();
+            }
+        }
+
+        function save()
+        {
+            var mode = document.querySelector("input[name='selected_mode']:checked").value;
+            
+            var state = document.querySelector("input[name='selected_keyboard_state']:checked").value;
+            var brightness = document.getElementById("backlight_value_range").value;
+
+            window.set_keyboard_mode(mode);
+
+            if(mode == "custom")
+            {
+                var color_list = new Object();
+                color_list["left"] = document.querySelector("input[name='selected_color_left']:checked").value;
+                color_list["middle"] = document.querySelector("input[name='selected_color_middle']:checked").value;
+                color_list["right"] = document.querySelector("input[name='selected_color_right']:checked").value;
+
+                window.set_keyboard_color(color_list);
+            }
+
+            window.set_keyboard_brightness(brightness);
+            window.set_keyboard_state(state);
+        }
+
+        function set_settings_as_default()
+        {
+            var mode = document.querySelector("input[name='selected_mode']:checked").getAttribute("mode_value");
+            var state = document.querySelector("input[name='selected_keyboard_state']:checked").value;
+            var brightness = document.getElementById("backlight_value_range").value;
+            var color_list = new Object();
+
+            if(mode == "1")
+            {
+                var color_list = new Object();
+                color_list["left"] = document.querySelector("input[name='selected_color_left']:checked").value;
+                color_list["middle"] = document.querySelector("input[name='selected_color_middle']:checked").value;
+                color_list["right"] = document.querySelector("input[name='selected_color_right']:checked").value;
+            }
+
+            window.create_modprobe_file(mode, brightness, color_list, state);
+        }
+
+        function set_module_status_callback(is_loaded)
+        {
+            if(is_loaded)
+            {
+                document.getElementById("module_status_element").innerHTML = get_language_string(language, "status_kernel_module_is_loaded");
+            }
+            else
+            {
+                document.getElementById("module_status_element").innerHTML = get_language_string(language, "status_kernel_module_is_not_loaded");
+            }
+        }
+
+        function set_language()
+        {
+            this.language = document.querySelector("input[name='selected_language']:checked").value;
+
+            var mode_form_element = document.getElementById("mode_form");
+            while(mode_form_element.firstChild) {
+                mode_form_element.removeChild(mode_form_element.firstChild);
+            }
+
+            var mode_form_element = document.getElementById("mode_form");
+            while(mode_form_element.firstChild) {
+                mode_form_element.removeChild(mode_form_element.firstChild);
+            }
+
+            var color_regions = ["left", "middle", "right"];
+
+            for(var i = 0; i < color_regions.length; i++)
+            {
+                var current_region = color_regions[i];
+
+                var color_form_element = document.getElementById("color_form_" + current_region);
+                while(color_form_element.firstChild) {
+                    color_form_element.removeChild(color_form_element.firstChild);
+                }
+            }
+
+            render_view();
+        }
+    </script>
+</body>
+</html>
