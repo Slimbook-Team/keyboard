@@ -1541,6 +1541,22 @@ static struct dmi_system_id clevo_xsm_dmi_table[] __initdata = {
                 .driver_data = &kb_full_color_ops,
         },
 	{
+                .ident = "ESSENTIAL",
+                .matches = {
+                        DMI_MATCH(DMI_PRODUCT_NAME, "ESSENTIAL"),
+                },
+                .callback = clevo_xsm_dmi_matched,
+                .driver_data = &kb_full_color_ops,
+        },
+	{
+                .ident = "SLIMBOOK",
+                .matches = {
+                        DMI_MATCH(DMI_PRODUCT_NAME, "SLIMBOOK"),
+                },
+                .callback = clevo_xsm_dmi_matched,
+                .driver_data = &kb_full_color_ops,
+        },
+	{
 		.ident = "Clevo N850HJ",
 		.matches = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "N85_N87"),
