@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extensions-clevo-xsm-wmi">
+  <schema path="/org/gnome/shell/extensions/clevo-xsm-wmi/" id="org.gnome.shell.extensions.clevo-xsm-wmi">
+    <key type="i" name="right-slider">
+      <default>1</default>
+      <summary>Right Light Slider position</summary>
+      <description>Set slider position of the Right Light Slider. Must be in range 0 and 7</description>
+    </key>
+        <key type="i" name="center-slider">
+      <default>1</default>
+      <summary>Center Light Slider position</summary>
+      <description>Set slider position of the Center Light Slider. Must be in range 0 and 7</description>
+    </key>
+        <key type="i" name="left-slider">
+      <default>1</default>
+      <summary>Left Light Slider position</summary>
+      <description>Set slider position of the Left Light Slider. Must be in range 0 and 7</description>
+    </key>
+        <key type="i" name="main-slider">
+      <default>1</default>
+      <summary>Right Light Slider position</summary>
+      <description>Set slider position of the Main Light Slider. Must be in range 0 and 7</description>
+    </key>
+        <key type="i" name="brightness">
+      <default>10</default>
+      <summary>Brightness Slider position</summary>
+      <description>Set slider position of the maximum brightness. Must be in range 0 and 10</description>
+    </key>
+    <key type="b" name="restore-on-restart">
+        <default>true</default>
+        <summary>Restore state after computer restart</summary>
+        <description>Save the state of the Backlight keyboard in order to restore it after a restart.</description>
+    </key>
+    <key type="b" name="menu-opened">
+        <default>false</default>
+        <summary>Show submenu</summary>
+        <description>Show the submenu of left center right light</description>
+    </key>
+  </schema>
+</schemalist>
