@@ -11,6 +11,7 @@ standard compile stuff (c compiler, make, etc)
 linux-headers
 
 **kernel module**
+
 git clone https://github.com/slimbook/keyboard.git
 cd keyboard/backlight/essential/rgb-module/module/
 sudo apt install gcc make build-essential
