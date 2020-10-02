@@ -2,9 +2,7 @@ Install
 ____
 
 **kernel module**
-git clone rgbcontrol
+git clone rgb-module
 
 
 
-*extra: gnome extension*
-https://extensions.gnome.org/extension/1949/clevo-backlight-keyboard/
