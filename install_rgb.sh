@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /tmp/
+
 git clone https://github.com/slimbook/keyboard.git
 
 cd keyboard/backlight/essential/rgb-module/module/
