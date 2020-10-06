@@ -6,9 +6,8 @@
 
 Dependencies:
 
-standard compile stuff (c compiler, make, etc)
-
-linux-headers
+- standard compile stuff (c compiler, make, etc)
+- linux-headers # if Ubuntu: sudo apt install linux-headers-$(uname -r)
 
 Open a terminal and:
 
