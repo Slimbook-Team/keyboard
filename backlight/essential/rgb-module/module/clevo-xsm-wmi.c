@@ -1540,6 +1540,14 @@ static struct dmi_system_id clevo_xsm_dmi_table[] __initdata = {
                 .callback = clevo_xsm_dmi_matched,
                 .driver_data = &kb_full_color_ops,
         },
+		{
+                .ident = "SLIMBOOK",
+                .matches = {
+                        DMI_MATCH(DMI_PRODUCT_NAME, "SLIMBOOK"),
+                },
+                .callback = clevo_xsm_dmi_matched,
+                .driver_data = &kb_full_color_ops,
+        },
 	{
                 .ident = "ESSENTIAL",
                 .matches = {
@@ -1549,9 +1557,9 @@ static struct dmi_system_id clevo_xsm_dmi_table[] __initdata = {
                 .driver_data = &kb_full_color_ops,
         },
 	{
-                .ident = "SLIMBOOK",
+                .ident = "Essential15L",
                 .matches = {
-                        DMI_MATCH(DMI_PRODUCT_NAME, "SLIMBOOK"),
+                        DMI_MATCH(DMI_PRODUCT_NAME, "Essential15L"),
                 },
                 .callback = clevo_xsm_dmi_matched,
                 .driver_data = &kb_full_color_ops,
