@@ -8,7 +8,9 @@ Dependencies:
 
 - standard compile stuff (c compiler, make, etc)
 - linux-headers 
+
       · Ubuntu: sudo apt install linux-headers-$(uname -r)
+
       · Fedora: yum -y install kernel-devel kernel-headers
       
 
