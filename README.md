@@ -23,10 +23,12 @@ Dependencies:
       · Fedora: yum -y install git kernel-devel kernel-headers
       
 
-Open a terminal and:
+      Open a terminal and:
 
-wget https://raw.githubusercontent.com/slimbook/keyboard/main/install_rgb.sh
+      wget https://raw.githubusercontent.com/slimbook/keyboard/main/install_rgb.sh
 
-sudo bash ./install_rgb.sh
+      sudo bash ./install_rgb.sh
 
-reboot
+      reboot
+
+Thanks
