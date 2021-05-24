@@ -4,8 +4,11 @@
 
 **Install Slimbook RGB Keyboard on Ubuntu (debian distros)**
 
+
 sudo add-apt-repository ppa:slimbook/slimbook
+
 sudo apt-get install slimbookrgbkeyboard
+
 
 **Install Slimbook RGB Keyboard on other Linux distros**
 (no GUI Interface)
