@@ -34,7 +34,9 @@ Dependencies:
 Thanks
 
 More information of GUI here:
+
 https://slimbook.es/en/tutoriales/aplicaciones-slimbook/501-en-slimbook-rgb-keyboard-3-0
 
 **Information:**
-We have a private repo for Slimbook RGB Keyboard because we find that the software is not mature enough yet. If you want to help with development you can ask for access at dev@slimbook.es
+
+*We have a private repo for Slimbook RGB Keyboard because we find that the software is not mature enough yet. If you want to help with development you can ask for access at dev@slimbook.es*
