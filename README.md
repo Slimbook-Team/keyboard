@@ -32,3 +32,6 @@ Dependencies:
       reboot
 
 Thanks
+
+More information of GUI here:
+https://slimbook.es/en/tutoriales/aplicaciones-slimbook/501-en-slimbook-rgb-keyboard-3-0
