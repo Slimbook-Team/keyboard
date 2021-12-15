@@ -1540,7 +1540,7 @@ static struct dmi_system_id clevo_xsm_dmi_table[] __initdata = {
                 .callback = clevo_xsm_dmi_matched,
                 .driver_data = &kb_full_color_ops,
         },
-		{
+	{
                 .ident = "SLIMBOOK",
                 .matches = {
                         DMI_MATCH(DMI_PRODUCT_NAME, "SLIMBOOK"),
@@ -1565,7 +1565,7 @@ static struct dmi_system_id clevo_xsm_dmi_table[] __initdata = {
                 .driver_data = &kb_full_color_ops,
         },
 	{
-                .ident = "ESS-15-AMD-5",
+                .ident = "Essential 15 AMD 5000",
                 .matches = {
                         DMI_MATCH(DMI_PRODUCT_NAME, "ESS-15-AMD-5"),
                 },
@@ -1604,22 +1604,22 @@ static struct dmi_system_id clevo_xsm_dmi_table[] __initdata = {
 		.callback = clevo_xsm_dmi_matched,
 		.driver_data = &kb_full_color_with_extra_ops,
 	},
-  {
+	{
 		.ident = "Clevo N870HP6",
 		.matches = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "N85_87HP6"),
 		},
 		.callback = clevo_xsm_dmi_matched,
 		.driver_data = &kb_full_color_ops,
-  },
+	},
 	{
-    .ident = "Clevo P65_67HSHP",
-    .matches = {
-        DMI_MATCH(DMI_PRODUCT_NAME, "P65_67HSHP"),
-    },
-    .callback = clevo_xsm_dmi_matched,
-    .driver_data = &kb_full_color_ops,
-  },
+		.ident = "Clevo P65_67HSHP",
+		.matches = {
+		DMI_MATCH(DMI_PRODUCT_NAME, "P65_67HSHP"),
+   		},
+    		.callback = clevo_xsm_dmi_matched,
+    		.driver_data = &kb_full_color_ops,
+  	},
 	/* Ones that don't follow the 'standard' product names above */
 	{
 		.ident = "Clevo P7xxDM(-G)",
