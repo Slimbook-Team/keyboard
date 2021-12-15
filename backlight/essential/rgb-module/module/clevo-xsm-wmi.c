@@ -21,7 +21,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define CLEVO_XSM_DRIVER_NAME KBUILD_MODNAMEESS
+#define CLEVO_XSM_DRIVER_NAME KBUILD_MODNAME
 #define pr_fmt(fmt) CLEVO_XSM_DRIVER_NAME ": " fmt
 
 #include <linux/acpi.h>
