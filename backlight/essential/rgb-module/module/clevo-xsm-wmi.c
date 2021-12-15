@@ -21,7 +21,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define CLEVO_XSM_DRIVER_NAME KBUILD_MODNAME
+#define CLEVO_XSM_DRIVER_NAME KBUILD_MODNAMEESS
 #define pr_fmt(fmt) CLEVO_XSM_DRIVER_NAME ": " fmt
 
 #include <linux/acpi.h>
@@ -1560,6 +1560,14 @@ static struct dmi_system_id clevo_xsm_dmi_table[] __initdata = {
                 .ident = "Essential15L",
                 .matches = {
                         DMI_MATCH(DMI_PRODUCT_NAME, "Essential15L"),
+                },
+                .callback = clevo_xsm_dmi_matched,
+                .driver_data = &kb_full_color_ops,
+        },
+	{
+                .ident = "ESS-15-AMD-5",
+                .matches = {
+                        DMI_MATCH(DMI_PRODUCT_NAME, "ESS-15-AMD-5"),
                 },
                 .callback = clevo_xsm_dmi_matched,
                 .driver_data = &kb_full_color_ops,
