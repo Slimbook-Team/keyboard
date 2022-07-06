@@ -1571,15 +1571,23 @@ static struct dmi_system_id clevo_xsm_dmi_table[] __initdata = {
                 },
                 .callback = clevo_xsm_dmi_matched,
                 .driver_data = &kb_full_color_ops,
-        },
+	},
 	{
-                .ident = "Essential 15 Intel 11",
+                .ident = "ESSENTIAL-15-11",
                 .matches = {
                         DMI_MATCH(DMI_PRODUCT_NAME, "ESSENTIAL-15-11"),
                 },
                 .callback = clevo_xsm_dmi_matched,
                 .driver_data = &kb_full_color_ops,
-        },
+	},
+	{
+                .ident = "ESSENTIAL-15-11 ",
+                .matches = {
+                        DMI_MATCH(DMI_PRODUCT_NAME, "ESSENTIAL-15-11 "),
+                },
+                .callback = clevo_xsm_dmi_matched,
+                .driver_data = &kb_full_color_ops,
+	},
 	{
 		.ident = "Clevo N850HJ",
 		.matches = {
