@@ -85,9 +85,15 @@ struct {
 } kb_colors[] = COLORS;
 #undef C
 
+#define CLEVO_ACPI_RESOURCE_HID		"CLV0001"
 #define KB_COLOR_DEFAULT      KB_COLOR_blue
 #define KB_BRIGHTNESS_MAX     10
 #define KB_BRIGHTNESS_DEFAULT KB_BRIGHTNESS_MAX
+
+static const struct acpi_device_id clevo_acpi_device_ids[] = {
+	{CLEVO_ACPI_RESOURCE_HID, 0},
+	{"", 0}
+};
 
 static int param_set_kb_color(const char *val, const struct kernel_param *kp)
 {
